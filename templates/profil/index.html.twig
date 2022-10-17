@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+
+{% block header%}
+
+{% endblock %}
+{% block body %}
+    {% include 'home/header.html.twig' %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    {% if not profilComplet %}
+    {{ form_start(profil) }}
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(profil) }}
+    {% else %}
+    {% include 'profil/_menuprofil.html.twig' %}
+	<div class="justify-self-center col-span-4 mr-7">
+		<div class="container">
+			<h1 class="mt-20 text-3xl text-center font-bold">Mes Articles</h1>
+			<div class="flex mt-10 mb-10 justify-between">
+				<a href="{{path('app_post_new')}}" class="rounded-[20px] bg-white shadow-gn m-4 ml-40 p-3">+ Créer un article</a>
+				<a href="" class="rounded-[20px] bg-white shadow-gn m-4 mr-40 p-3">Filtrer les articles</a>
+			</div>
+
+        <div class="mt-10 mb-10">
+            <hr class="border-[#BBBFCA] border-2 rounded w-6/12 align-items-cente m-auto">
+        </div>
+        {% for post in posts %}
+            {% if profilComplet == post.idProfil %}
+            <div class="container flex justify-center">
+                <div class="rounded-[20px] w-[100%] justify-center bg-white shadow-gn mt-10 mb-10 m-4 p-3">
+                    <div class="flex">
+                        <img class="rounded-[20px] self-center w-2/6 m-3" src="{{ asset('images/post/')}}{{ post.imageName }}"  alt="{{ post.imageName }}">
+                        <div class="container w-[70%]">
+                            <h3 class="text-3xl ml-4 mt-2 mb-3">{{post.title}}</h3>
+
+                            <p class="text overflow-auto h-32 mr-10 mb- ml-4">{{post.content}}</p>
+
+                            <div class="ml-4 mt-10 italic">{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</div>
+                            <div
+                                class="flex justify-end mt-3 mr-10">
+                                {# start paramettre #}
+                                <div class="flex self-end">
+                                    <div class="dropdown relative">
+                                        <button class="flex gap-1 mb-[6px] p-3 " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class=" w-1 h-1 bg-grisrshover rounded-full"></span>
+                                            <span class=" w-1 h-1 bg-grisrshover rounded-full"></span>
+                                            <span class=" w-1 h-1 bg-grisrshover rounded-full"></span>
+                                        </button>
+                                        <ul class=" dropdown-menu min-w-max absolute  bg-white text-base z-50
+                                        float-left py-2 list-none text-left rounded-lg shadow-lg mt-1  m-0 bg-clip-padding border-none" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                {% include 'post/_delete_form.html.twig' %}
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100" href="{{path('app_post_edit', {'id': post.id})}}">Modifier</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {# end paramettre #}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {% for comment in comments | slice(0,200) %}
+                    {% if post == comment.idPost %}
+                        <div class="container flex justify-center">
+                            <div class="rounded-[20px] w-[70%] justify-center bg-white shadow-gn m-4 p-3">
+                                <p class="text overflow-auto h-10">{{comment.content}}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+	
+	{% include 'home/footer.html.twig' %}
+{% endblock %}

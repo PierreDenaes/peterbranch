@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fashion Book Paris{% endblock %}
+
+{% block body %}
+ <h1>Accueil</h1>
+    <a href="{{ path('app_post_new') }}">Créer un nouveau post</a>
+        {% for post in posts %}
+            {% if loop.index0 < 5 %}
+            <div class="container flex justify-center">
+                <div class="rounded-[20px] w-[100%] justify-center bg-white shadow-gn mt-10 mb-10 m-4 p-3">
+                    <div class="flex">
+                        <img class="rounded-[20px] self-center w-2/6 m-3" src="{{ asset('images/post/')}}{{ post.imageName }}"  alt="{{ post.imageName }}">
+                        <div class="container w-[70%]">
+                            <h3 class="text-3xl ml-4 mt-2 mb-3">{{post.title}}</h3>
+                            <p class="text overflow-auto h-32 mr-10 mb- ml-4">{{post.content}}</p>
+                            <div class="ml-4 mt-10 italic">{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% for postLike in postLikes %}
+                    {% if post == postLike.idPost %}
+                        <p>{{   postLike.isActive|length }}</p>
+
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% for comment in comments | slice(0,200)%}
+                {% if post == comment.idPost %}
+                    <div class="container flex justify-center">
+                        <div class="rounded-[20px] w-[70%] justify-center bg-white shadow-gn m-4 p-3">
+                                    <p class="text overflow-auto h-10">{{comment.content}}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        {% endfor %}
+{% endblock %}
