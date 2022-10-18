@@ -1,0 +1,60 @@
+<header>
+
+	<div class="inline-flex absolute w-full">
+		<div class="relative w-full h-[160px] bg-gray-700 bg-opacity-20 z-30">
+
+			{# text and outline #}
+			<div class="grid grid-cols-3 gap-12">
+				<div class="grid-cols-1 h-full items-center pb-[2rem] ml-[2rem] mt-[2rem]">
+
+				</div>
+
+
+
+				<div class="flex justify-center mt-10">
+
+					<p class="text-white"> FASHION BOOK </p>
+					<div class="">
+						<button id="bienvenue" class="panneau px-6 py-2.5 bg-gray-400 text-white font-medium text-xs rounded shadow-md active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out mr-1.5 bg-opacity-10" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop">
+							<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"  preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><g transform="rotate(-90 512 512) translate(1024 0) scale(-1 1)"><path fill="white" d="M452.864 149.312a29.12 29.12 0 0 1 41.728.064L826.24 489.664a32 32 0 0 1 0 44.672L494.592 874.624a29.12 29.12 0 0 1-41.728 0a30.592 30.592 0 0 1 0-42.752L764.736 512L452.864 192a30.592 30.592 0 0 1 0-42.688zm-256 0a29.12 29.12 0 0 1 41.728.064L570.24 489.664a32 32 0 0 1 0 44.672L238.592 874.624a29.12 29.12 0 0 1-41.728 0a30.592 30.592 0 0 1 0-42.752L508.736 512L196.864 192a30.592 30.592 0 0 1 0-42.688z"/></g></svg>
+						</button>
+					</div>
+					<div class="offcanvas offcanvas-top fixed bg-gray-800 transition duration-300 ease-in-out text-white bottom-0 top-0 left-0 right-0 border-none h-[25.4%] bg-opacity-10 text-center" id="offcanvasTop">
+						<div class="mb-8 mt-20">
+
+						</div>
+
+						<div class="offcanvas-header text-center pt-4 mt-4">
+							<a class="ml-8 mr-8" id="offcanvasTopLabel">Accueil</a>
+							<a class="ml-8 mr-8">Publication/Reseaux</a>
+							<a class="ml-8 mr-8">Nos Tutos/Cours</a>
+							<a class="ml-8 mr-8">Evenements</a>
+							<a class="ml-8 mr-8">Espace Jobs</a>
+							{% if app.user %}
+							<a href="{{ path('app_logout') }}" class="ml-8 mr-8">Déconnexion</a>
+							{% endif %}
+
+						</div>
+
+						<button type="button" class="text-white border-none rounded-none opacity-80 mt-4"  data-bs-dismiss="offcanvas" aria-label="Close">
+							<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><g transform="rotate(90 512 512)"><path fill="white" d="M529.408 149.376a29.12 29.12 0 0 1 41.728 0a30.592 30.592 0 0 1 0 42.688L259.264 511.936l311.872 319.936a30.592 30.592 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L197.76 534.272a32 32 0 0 1 0-44.672l331.648-340.224zm256 0a29.12 29.12 0 0 1 41.728 0a30.592 30.592 0 0 1 0 42.688L515.264 511.936l311.872 319.936a30.592 30.592 0 0 1-.512 43.264a29.12 29.12 0 0 1-41.216-.512L453.76 534.272a32 32 0 0 1 0-44.672l331.648-340.224z"/></g></svg>
+						</button>
+
+					</div>
+
+
+				</div>
+				{% if not app.user %}
+				<div class="grid-cols-1 col h-full">
+					<div class="flex justify-center ml-10 mt-20">
+						<a href="{{ path('app_register') }}" class="text-white font-roboto">Inscription/</a>
+						<a href="{{ path('app_login') }}" class="text-white font-roboto">Connexion</a>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+
+		</div>
+	</div>
+	<img class="w-full h-[240px] mb-4" src="{{ asset('images/post/arthur.jpeg') }}" alt="...">
+</header>

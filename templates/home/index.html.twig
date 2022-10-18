@@ -3,6 +3,7 @@
 {% block title %}Fashion Book Paris{% endblock %}
 
 {% block body %}
+    {% include './headerAndFooter/header.html.twig' %}
  <h1>Accueil</h1>
     <a href="{{ path('app_post_new') }}">Créer un nouveau post</a>
         {% for post in posts %}
