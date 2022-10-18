@@ -16,13 +16,11 @@ class HomeController extends AbstractController
     public function index(PostRepository $postRepository, PostCommentRepository $postCommentRepository,
                           PostLikeRepository $postLikeRepository): Response
     {
-
-
         return $this->render('home/index.html.twig', [
             'posts' => $postRepository->findAll(),
             'comments' => $postCommentRepository->findAll(),
             'postLikes' => $postLikeRepository->findAll(),
-            'postLikesSum' => $postLikeRepository->findSomePostLike(),
+
         ]);
        
     }

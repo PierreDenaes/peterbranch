@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
             ->setStatus($user->getStatus())
             ->setSiret($this->faker->siret)
                 ->setIsActive(1)
-                ->setImageName('web-search-vector-icon-png-253149-6331a52e33534282542452.jpeg')
+                ->setImageName('avatarDefault.jpeg')
 
         ;
         $manager->persist($profil);
@@ -86,7 +86,8 @@ class AppFixtures extends Fixture
                     $postlike = new PostLike();
                     $postlike->setIdProfil($profilUnique)
                         ->setIdPost($postUnique)
-                        ->setIsActive(1);
+                        ->setIsActive(rand(0,1));
+
                     $manager->persist($postlike);
                 }
             }
@@ -123,7 +124,7 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        for($i = 0; $i <= 10; $i++){
+        for($i = 0; $i <= 5; $i++){
             foreach($profils as $profilUnique){
                 $story = new Story();
                 $story->setIdProfil($profilUnique)

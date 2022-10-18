@@ -56,7 +56,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/index.html.twig', [
             'posts' => $postRepository->findAll(),
             'comments' => $postCommentRepository->findAll(),
-            'postLike' => $postLikeRepository->findSomePostLike(),
+            'postLike' => $postLikeRepository->findAll(),
             'profilComplet' => $profilComplet,
             'profil' => $form->createView(),
             'user' => $user,   

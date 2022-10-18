@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\PostLike;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -40,15 +41,17 @@ class PostLikeRepository extends ServiceEntityRepository
     }
 
 
-    public function findSomePostLike()
-    {
-        return $this->createQueryBuilder('p')
-            ->select('SUM(p.isActive)')
-
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
+//    public function findSomePostLike($value)
+//    {
+//        return $this->createQueryBuilder('p')
+//
+//            ->select('SUM(p.love)')
+//            ->andWhere('p.idPost = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
 //    public function findOneBySomeField($value): ?PostLike
 //    {
