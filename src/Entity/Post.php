@@ -48,6 +48,9 @@ class Post
     #[ORM\OneToMany(mappedBy: 'idPost', targetEntity: PostLike::class, orphanRemoval: true)]
     private Collection $postLikes;
 
+    #[ORM\Column]
+    private ?bool $isActive = null;
+
     public function __construct()
     {
         $this->postComments = new ArrayCollection();
@@ -221,5 +224,17 @@ class Post
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
     }
 }

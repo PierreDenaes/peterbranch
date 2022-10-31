@@ -72,6 +72,7 @@ class AppFixtures extends Fixture
                 ->setTitle($this->faker->sentence(4))
                 ->setContent($this->faker->paragraph)
                 ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
+                ->setIsActive(rand(0,1))
                 ->setUpdatedAt(new \DateTimeImmutable())
                 ->setImageName(array_rand($arrImage));
                 $manager->persist($post);
