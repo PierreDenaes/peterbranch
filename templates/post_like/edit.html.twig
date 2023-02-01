@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PostLike{% endblock %}
+
+{% block body %}
+    <h1>Edit PostLike</h1>
+
+    {{ include('post_like/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_post_like_index') }}">back to list</a>
+
+    {{ include('post_like/_delete_form.html.twig') }}
+{% endblock %}

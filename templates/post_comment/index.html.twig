@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PostComment index{% endblock %}
+
+{% block body %}
+    <h1>PostComment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post_comment in post_comments %}
+            <tr>
+                <td>{{ post_comment.id }}</td>
+                <td>{{ post_comment.content }}</td>
+                <td>{{ post_comment.createdAt ? post_comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_post_comment_show', {'id': post_comment.id}) }}">show</a>
+                    <a href="{{ path('app_post_comment_edit', {'id': post_comment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_post_comment_new') }}">Create new</a>
+{% endblock %}

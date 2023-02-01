@@ -40,7 +40,7 @@ class Story
     #[ORM\OneToMany(mappedBy: 'idStory', targetEntity: StoryLike::class, orphanRemoval: true)]
     private Collection $storyLikes;
 
-    #[ORM\ManyToOne(inversedBy: 'storiess')]
+    #[ORM\ManyToOne(inversedBy: 'stories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profil $idProfil = null;
 

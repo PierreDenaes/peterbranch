@@ -38,7 +38,16 @@ class PostCommentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    public function findAllWithProfil()
+    {
+        return $this->createQueryBuilder('pc')
+            ->select('pc.id, pc.content as comment , pc.createdAt, pr.firstname, pr.lastname, pr.imageName as authorPix, p.id as postId')
+            ->leftJoin('pc.idProfil', 'pr')
+            ->leftJoin('pc.idPost', 'p')
+            ->groupBy('pc.id')
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return PostComment[] Returns an array of PostComment objects
 //     */

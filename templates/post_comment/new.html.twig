@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PostComment{% endblock %}
+
+{% block body %}
+    <h1>Create new PostComment</h1>
+
+    {{ include('post_comment/_form.html.twig') }}
+
+    <a href="{{ path('app_post_comment_index') }}">back to list</a>
+{% endblock %}

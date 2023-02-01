@@ -42,13 +42,31 @@ class PostRepository extends ServiceEntityRepository
    /**
     * @return Post[] Returns an array of Post objects
     */
-   public function findAllComment()
+   public function findAllSumOfComment()
    {
        return $this->createQueryBuilder('p')
+       ->select('p.id as postId, COUNT(pc.id) as totalComment')
+       ->leftJoin('p.postComments', 'pc')
+       ->where('p.id = pc.idPost')
+       ->groupBy('p.id')
        ->getQuery()
        ->getResult()  
        ;
    }
+
+   public function findAllWithSumOfLike ()
+   {
+       return $this->createQueryBuilder('p')
+       ->select('p.id, p.title,p.imageName, p.content, p.createdAt,  p.updatedAt, p.isActive, pr.firstname, pr.lastname, pr.imageName as authorPix, pr.isActive as profilOk,  SUM(l.isActive) as likes')
+       ->leftJoin('p.postLikes', 'l')
+       ->leftJoin('p.idProfil','pr')
+       ->where('l.isActive = 1')
+       ->groupBy('p.id')
+       ->getQuery()
+       ->getResult()
+       ;
+   }
+
 
 //    public function findOneBySomeField($value): ?Post
 //    {
@@ -59,4 +77,5 @@ class PostRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

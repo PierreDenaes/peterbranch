@@ -32,7 +32,7 @@ class UserCrudController extends AbstractCrudController
         yield TextField::new('firstName');
         yield ChoiceField::new('status')
             ->setChoices(array_combine($status, $status))
-            ->allowMultipleChoices()
+            ->allowMultipleChoices(false)
             ->renderExpanded()
             ->renderAsBadges();
         yield BooleanField::new('isVerified');
